@@ -302,15 +302,18 @@ public abstract class Stringify {
      * @return a String
      */
     public static String stringify(final Address[] addresses) {
-        List<String> parsed = new ArrayList<String>();
-        for (Address addr : addresses) {
-            if (addr instanceof InternetAddress) {
-                parsed.add(((InternetAddress) addr).getAddress());
-            } else {
-                parsed.add(addr.toString());
+        if (addresses != null) {
+            List<String> parsed = new ArrayList<String>();
+            for (Address addr : addresses) {
+                if (addr instanceof InternetAddress) {
+                    parsed.add(((InternetAddress) addr).getAddress());
+                } else {
+                    parsed.add(addr.toString());
+                }
             }
+            return StringUtils.join(parsed, ",");
         }
-        return StringUtils.join(parsed, ",");
+        return "";
     }
 
     /**
