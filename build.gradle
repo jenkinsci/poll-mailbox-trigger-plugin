@@ -81,8 +81,6 @@ task unzip(type: Copy) {
 
 unzip.dependsOn jpi
 
-findbugs { sourceSets = [sourceSets.main] }
-
 configurations.runtime {
     resolutionStrategy {
         force 'commons-codec:commons-codec:1.8'

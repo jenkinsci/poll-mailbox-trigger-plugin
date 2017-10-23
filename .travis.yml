@@ -1,7 +1,5 @@
 language: java
 sudo: required
-jdk:
-  - oraclejdk7
 
 # enable codecov reporting...
 after_success:
