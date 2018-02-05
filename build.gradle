@@ -37,6 +37,7 @@ jenkinsPlugin {
     gitHubUrl = "https://github.com/jenkinsci/$project.name"
     compatibleSinceVersion = '1.424'
     fileExtension = 'hpi'
+    pluginFirstClassLoader = true
     developers {
         developer {
             id 'nickg'
@@ -48,7 +49,9 @@ jenkinsPlugin {
 
 dependencies {
     compile "org.jenkins-ci.lib:xtrigger-lib:0.25"
-    compile "com.sun.mail:javax.mail:1.5.1"
+    compile("com.sun.mail:javax.mail:1.6.0"){
+        exclude module: 'activation'
+    }
 
     // Useful for interrogating the injected environment variables...
 //    jenkinsPlugins 'org.jenkins-ci.plugins:envinject:1.92.1@jar'
@@ -71,7 +74,7 @@ configurations.findAll {!it.name.endsWith('junit-dep')}.each { conf ->
 
 jpi.outputs.upToDateWhen { false }
 jpi.doLast {
-    verifySizeKb(file(jpi.archivePath), 641)
+    verifySizeKb(file(jpi.archivePath), 841)
 }
 
 task unzip(type: Copy) {
