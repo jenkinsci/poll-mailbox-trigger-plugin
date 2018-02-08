@@ -52,6 +52,7 @@ public class MailReader extends HasLogger {
     }
 
     public MailReader connect() throws MessagingException {
+        Thread.currentThread().setContextClassLoader(Session.class.getClassLoader());
         Session session = Session.getInstance(properties.getProperties(), null);
         session.setDebugOut(getLogger().getPrintStream());
         store = session.getStore(storeName);

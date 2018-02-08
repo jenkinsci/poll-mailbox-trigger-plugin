@@ -95,7 +95,7 @@ public abstract class MailWrapperUtils {
         public CustomProperties getMessageProperties(final Message message, final String prefix, final CustomProperties p) throws MessagingException, IOException {
             CustomProperties envVars = new CustomProperties();
             String msgSubject = stringify(message.getSubject());
-            envVars.put(prefix + "subject", msgSubject);
+            envVars.put(prefix + "subject", (msgSubject == null) ? "" : msgSubject);
             envVars.put(prefix + "from", stringify(message.getFrom()));
             envVars.put(prefix + "replyTo", stringify(message.getReplyTo()));
             envVars.put(prefix + "flags", stringify(message.getFlags()));
