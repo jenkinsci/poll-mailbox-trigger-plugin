@@ -116,6 +116,7 @@ public class StepDefs {
             config.username = newConf.username
             config.password = newConf.password
             config.appendScript(newConf.script)
+            config.attachments = newConf.attachments
         }
         configUpdated(config)
     }
@@ -125,7 +126,8 @@ public class StepDefs {
         plugin.setUsername(config.username)
         plugin.setPassword(config.buildPasswordSecret())
         plugin.setScript(config.script)
-        effectiveConfig = PollMailboxTrigger.initialiseDefaults(config?.host, config?.username, config?.buildPasswordSecret(), config?.script, PollMailboxTrigger.AttachmentOptions.IGNORE.name())
+        plugin.setAttachments(config.attachments)
+        effectiveConfig = PollMailboxTrigger.initialiseDefaults(config?.host, config?.username, config?.buildPasswordSecret(), config?.script, config?.attachments)
     }
 
     @When('the script')
@@ -198,7 +200,7 @@ public class StepDefs {
 
     @Then('the log is')
     public void the_log_is(String expectedLog){
-        String actualLog = logStream.toString().replaceAll(/\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2} (AM|PM)/, '<date>').replaceAll(/\r\n/, '\n')
+        String actualLog = logStream.toString().replaceAll(/\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2} (AM|PM|午前|午後)/, '<date>').replaceAll(/\r\n/, '\n')
 		expectedLog = expectedLog.replaceAll(/\r\n/, '\n')
         assertThat(actualLog, is(expectedLog));
     }

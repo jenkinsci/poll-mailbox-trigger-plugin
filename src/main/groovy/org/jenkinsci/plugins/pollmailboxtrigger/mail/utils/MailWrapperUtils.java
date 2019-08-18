@@ -25,10 +25,7 @@ import static org.jenkinsci.plugins.pollmailboxtrigger.mail.utils.SearchTermHelp
 import static org.jenkinsci.plugins.pollmailboxtrigger.mail.utils.SearchTermHelpers.flag;
 import static org.jenkinsci.plugins.pollmailboxtrigger.mail.utils.SearchTermHelpers.not;
 import static org.jenkinsci.plugins.pollmailboxtrigger.mail.utils.SearchTermHelpers.receivedSince;
-import static org.jenkinsci.plugins.pollmailboxtrigger.mail.utils.Stringify.BLANK;
-import static org.jenkinsci.plugins.pollmailboxtrigger.mail.utils.Stringify.MULTIPART_WILDCARD;
-import static org.jenkinsci.plugins.pollmailboxtrigger.mail.utils.Stringify.NEWLINE;
-import static org.jenkinsci.plugins.pollmailboxtrigger.mail.utils.Stringify.stringify;
+import static org.jenkinsci.plugins.pollmailboxtrigger.mail.utils.Stringify.*;
 
 /**
  * @author Nick Grealy
@@ -169,10 +166,15 @@ public abstract class MailWrapperUtils {
                 Multipart mp = (Multipart) content;
                 for (int i = 0; i < mp.getCount(); i++) {
                     BodyPart bodyPart = mp.getBodyPart(i);
-                    if (bodyPart instanceof MimeBodyPart && isNotBlank(bodyPart.getFileName())) {
+                    if (bodyPart instanceof MimeBodyPart) {
                         MimeBodyPart mimeBodyPart = (MimeBodyPart) bodyPart;
-                        mimeBodyPart.saveFile(new File(tmpDir, mimeBodyPart.getFileName()));
-                        foundAttachments = true;
+                        if (isNotBlank(bodyPart.getFileName())) {
+                            mimeBodyPart.saveFile(new File(tmpDir, mimeBodyPart.getFileName()));
+                            foundAttachments = true;
+                        } else if (bodyPart.isMimeType(MESSAGE_RFC822)) {
+                            mimeBodyPart.saveFile(File.createTempFile(String.valueOf(System.nanoTime()), ".eml", tmpDir));
+                            foundAttachments = true;
+                        }
                     }
                 }
             }

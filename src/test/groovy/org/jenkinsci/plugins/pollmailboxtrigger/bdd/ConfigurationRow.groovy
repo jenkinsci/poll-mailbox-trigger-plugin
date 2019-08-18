@@ -11,6 +11,7 @@ class ConfigurationRow {
     String username
     String password
     String script
+    String attachments
 
     Secret buildPasswordSecret(){
         password ? new Secret(password) : null

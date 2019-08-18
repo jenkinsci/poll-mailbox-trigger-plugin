@@ -8,7 +8,6 @@ Feature: Configuration
     When I set the configuration to
       | Host | Username | Password | Script |
     Then the effective configuration should be
-      | attachments         | IGNORE    |
       | folder              | INBOX     |
       | mail.debug          | false     |
       | mail.debug.auth     | false     |
@@ -20,8 +19,8 @@ Feature: Configuration
 
   Scenario: I want to be able to set the basic config values
     When I set the configuration to
-      | Host     | Username | Password |
-      | mail.com | morty    | chickens |
+      | Host     | Username | Password | Attachments|
+      | mail.com | morty    | chickens | IGNORE     |
     Then the effective configuration should be
       | attachments         | IGNORE    |
       | folder              | INBOX     |
@@ -39,8 +38,8 @@ Feature: Configuration
 
   Scenario: I want to be able to override the default config values
     When I set the configuration to
-      | Host | Username | Password |
-      | aaa  | bbb      | ccc      |
+      | Host | Username | Password |Attachments|
+      | aaa  | bbb      | ccc      |IGNORE     |
     And the script
     """
     mail.debug=true
@@ -81,8 +80,8 @@ Feature: Configuration
       | falsey  | false |
       | numeric | 80085 |
     When I set the configuration to
-      | Host       | Username   | Password   |
-      | aa $cat aa | bb $dog bb | cc $pig cc |
+      | Host       | Username   | Password   |Attachments|
+      | aa $cat aa | bb $dog bb | cc $pig cc |IGNORE     |
     And the script
     """
     mail.debug=$truthy
@@ -110,8 +109,8 @@ Feature: Configuration
 
   Scenario: I want to be able to clear the default config values
     When I set the configuration to
-      | Username | Password |
-      | bbb      | ccc      |
+      | Username | Password |Attachments|
+      | bbb      | ccc      |IGNORE      |
     And the script
     """
     folder=
@@ -130,8 +129,8 @@ Feature: Configuration
 
   Scenario: I want default values for IMAP
     When I set the configuration to
-      | Host     | Username | Password |
-      | mail.com | morty    | chickens |
+      | Host     | Username | Password |Attachments|
+      | mail.com | morty    | chickens |IGNORE      |
     And the script
     """
     storeName=imap
@@ -153,8 +152,8 @@ Feature: Configuration
 
   Scenario: I want default values for IMAPS
     When I set the configuration to
-      | Host     | Username | Password |
-      | mail.com | morty    | chickens |
+      | Host     | Username | Password |Attachments|
+      | mail.com | morty    | chickens |IGNORE    |
     And the script
     """
     storeName=imaps
@@ -176,8 +175,8 @@ Feature: Configuration
 
   Scenario: I want default values for POP3
     When I set the configuration to
-      | Host          | Username        | Password |
-      | pop.gmail.com | morty@gmail.com | chickens |
+      | Host          | Username        | Password |Attachments|
+      | pop.gmail.com | morty@gmail.com | chickens |IGNORE    |
     And the script
     """
     storeName=pop3
@@ -198,8 +197,8 @@ Feature: Configuration
 
   Scenario: I want default values for POP3S
     When I set the configuration to
-      | Host          | Username        | Password |
-      | pop.gmail.com | morty@gmail.com | chickens |
+      | Host          | Username        | Password |Attachments|
+      | pop.gmail.com | morty@gmail.com | chickens |IGNORE    |
     And the script
     """
     storeName=pop3s

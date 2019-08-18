@@ -281,8 +281,8 @@ public abstract class Stringify {
     /* javax.mail */
 
     public static final String TEXT_WILDCARD = "text/*", TEXT_HTML = "text/html", TEXT_PLAIN = "text/plain",
-            MULTIPART_WILDCARD = "multipart/*", MULTIPART_ALTERNATIVE = "multipart/alternative", NEWLINE = "\n",
-            BLANK = "";
+            MULTIPART_WILDCARD = "multipart/*", MULTIPART_ALTERNATIVE = "multipart/alternative",
+            MESSAGE_RFC822 = "message/rfc822", NEWLINE = "\n", BLANK = "";
 
 
     /**
