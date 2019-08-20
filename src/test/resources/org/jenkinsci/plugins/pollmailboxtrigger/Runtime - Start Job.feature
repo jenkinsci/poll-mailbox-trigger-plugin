@@ -10,8 +10,8 @@ Feature: Runtime - Start Job
     mail.imap.connectiontimeout=1000
     """
     When I set the configuration to
-      | Host     | Username | Password |
-      | mail.com | rick     | chickens |
+      | Host     | Username | Password | Attachments |
+      | mail.com | rick     | chickens | IGNORE |
 
   # happy path
 
@@ -150,3 +150,17 @@ Feature: Runtime - Start Job
   # todo: Error occurs, shown in the logs
   # todo: Check that the email is marked as read, so that another build isn't retriggered
   # todo: test Download attachments, so taht I can use them..
+
+
+
+  Scenario: I want the attachment file which content type is message_rfc822 and not have filename to save disk,
+  So that I have access to the email attachments from the Job
+    When I set the configuration to
+      | Host     | Username | Password | Attachments |
+      | mail.com | rick     | chickens | AUTO |
+    Given the emails
+      | Subject                   | SentXMinutesAgo | IsSeenFlag | From           | Body    |Attachments            |
+      | Jenkins > Build Plugin #4 | 5               | false      | nick@email.com | nothing | message_rfc822.txt |
+    When the Plugin's polling is triggered
+    Then a Jenkins job is scheduled with quietPeriod 0 and cause '[PollMailboxTrigger] Job was triggered by email sent from nick@email.com (<a href="triggerCauseAction">log</a>)'
+    Then there are 1 saved attachments

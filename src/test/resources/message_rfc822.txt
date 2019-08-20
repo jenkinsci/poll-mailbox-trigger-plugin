@@ -1,0 +1,20 @@
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment
+
+Received: from MyComputer 
+From: <foo@example.com>
+To: <foo@example.com>
+Subject: test msg
+Date: Fri, 9 Aug 2019 16:32:33 +0900
+Message-ID: <06b901d54e84$9d63f140$d82bd3c0$@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQLChAekuaJ98UcUhDkT1J+MjG4I+A==
+Content-Language: ja
+
+hello
+

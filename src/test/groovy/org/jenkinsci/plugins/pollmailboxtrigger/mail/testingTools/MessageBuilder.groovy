@@ -102,7 +102,7 @@ Nick
                 getContentType  : { 'text/html' },
                 getAllRecipients: { ['foo3@bar.com', 'foo4@bar.com'].collect { new InternetAddress(it) } as Address[] },
                 getContent      : { files.isEmpty() ? body.toString() : buildMultipartContent(files) },
-                isMimeType      : { it.startsWith('text') }
+                isMimeType      : { it.startsWith('text') || it.startsWith("multipart")}
         ]
     }
 
@@ -126,8 +126,10 @@ Nick
     public static Multipart buildMultipartContent(List<String> files){
         Multipart multipart = new MimeMultipart()
         files.each {
-            def part = new MimeBodyPart(MessageBuilder.getResourceAsStream(it))
-            part.setFileName(it)
+            def part = new MimeBodyPart(MessageBuilder.getClassLoader().getResourceAsStream(it))
+            if (!it.startsWith("message_rfc822")){
+                part.setFileName(it)
+            }
             part.setDisposition(Part.ATTACHMENT)
             multipart.addBodyPart(part)
         }
