@@ -1,19 +1,12 @@
-.idea/
-.gradle/
-.c9/
-# gradle/wrapper/
 target/
 work/
-build/
 out/
-target/
 
+# IDE
+.idea/
 *.iml
 *.iws
 *.ipr
 
-# We use a gradle 'incubating' feature, so we have to make sure we use the exact version of gradle.
-# gradlew
-# gradlew.bat
-
-Integration Test.feature
+# Maven
+.mvn/

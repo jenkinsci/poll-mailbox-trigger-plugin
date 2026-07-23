@@ -1,7 +1,7 @@
 [![GitHub release](https://img.shields.io/github/release/jenkinsci/poll-mailbox-trigger-plugin.svg)](https://github.com/jenkinsci/poll-mailbox-trigger-plugin/releases/latest)
 [![license](https://img.shields.io/github/license/jenkinsci/poll-mailbox-trigger-plugin.svg)](https://github.com/jenkinsci/poll-mailbox-trigger-plugin/blob/master/LICENSE)
 
-[![Build Status](https://api.travis-ci.org/jenkinsci/poll-mailbox-trigger-plugin.svg?branch=master "Build Status")](https://travis-ci.org/jenkinsci/poll-mailbox-trigger-plugin) [![Dependency Status](https://www.versioneye.com/user/projects/56d76c71d71695003886c352/badge.svg?style=plastic)](https://www.versioneye.com/user/projects/56d76c71d71695003886c352) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a585091b3479458fafe53ec58e6a15e1)](https://www.codacy.com/app/nickgrealy/poll-mailbox-trigger-plugin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jenkinsci/poll-mailbox-trigger-plugin&amp;utm_campaign=Badge_Grade) [![codecov](https://codecov.io/gh/jenkinsci/poll-mailbox-trigger-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/jenkinsci/poll-mailbox-trigger-plugin) [![Join the chat at https://gitter.im/jenkinsci/poll-mailbox-trigger-plugin](https://badges.gitter.im/jenkinsci/poll-mailbox-trigger-plugin.svg)](https://gitter.im/jenkinsci/poll-mailbox-trigger-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://ci.jenkins.io/job/Plugins/job/poll-mailbox-trigger-plugin/job/master/badge/icon)](https://ci.jenkins.io/job/Plugins/job/poll-mailbox-trigger-plugin/job/master/)
 
 # Poll Mailbox Trigger Plugin
 
@@ -111,40 +111,24 @@ Alternatives to polling?
 Building
 ---
 
+This plugin is built with [Apache Maven](https://maven.apache.org/) using the standard
+[Jenkins plugin parent POM](https://github.com/jenkinsci/plugin-pom).
+
 Prerequisites:
 
-- JDK 6 (or above)
+- JDK 17 or 21
 
-To setup for use with Intellij IDEA
-
-```Shell
-./gradlew cleanIdea idea
-```
-
-To run Jenkins ([http://localhost:8080](http://localhost:8080)) locally with the plugin installed:
+To build the Jenkins plugin (`.hpi`) file and run the tests:
 
 ```Shell
-./gradlew clean server
+mvn clean verify
 ```
 
-To build the Jenkins plugin (.jpi) file:
+To run Jenkins ([http://localhost:8080/jenkins](http://localhost:8080/jenkins)) locally with the plugin installed:
 
 ```Shell
-./gradlew clean jpi
+mvn hpi:run
 ```
-
-To publish/release the Jenkins plugin:
-
-1. Update the `version` in `gradle.properties`, to remove "-SNAPSHOT" (increment and re-add after publishing)
-2. Setup the `~/.jenkins-ci.org` credentials file as per the instructions here [https://wiki.jenkins-ci.org/display/JENKINS/Gradle+JPI+Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Gradle+JPI+Plugin)
-3. Ensure gradle is using `JDK7` (for dist compatibility) - `./gradlew --version`
-4. Then run the command:
-
-```Shell
-./gradlew clean publish
-```
-
-5. (todo) automate github version increment (and above steps?)
 
 Screenshots
 ---

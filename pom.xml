@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jenkins-ci.plugins</groupId>
+        <artifactId>plugin</artifactId>
+        <version>6.2211.v27f680c93c53</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>org.jenkins-ci.plugins</groupId>
+    <artifactId>poll-mailbox-trigger-plugin</artifactId>
+    <version>${revision}${changelist}</version>
+    <packaging>hpi</packaging>
+
+    <name>Poll Mailbox Trigger Plugin</name>
+    <description>A Jenkins plugin, to poll an email inbox, and trigger jobs based on new emails.</description>
+    <url>https://github.com/jenkinsci/${gitHubRepo}</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>nickg</id>
+            <name>Nick Grealy</name>
+            <email>nickgrealy@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/jenkinsci/${gitHubRepo}.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/${gitHubRepo}.git</developerConnection>
+        <url>https://github.com/jenkinsci/${gitHubRepo}</url>
+        <tag>${scmTag}</tag>
+    </scm>
+
+    <properties>
+        <revision>1.027</revision>
+        <changelist>-SNAPSHOT</changelist>
+        <gitHubRepo>poll-mailbox-trigger-plugin</gitHubRepo>
+        <!-- https://www.jenkins.io/doc/developer/plugin-development/choosing-jenkins-baseline/ -->
+        <jenkins.baseline>2.541</jenkins.baseline>
+        <jenkins.version>${jenkins.baseline}.3</jenkins.version>
+        <!-- Third-party libraries intentionally bundled into the plugin (not provided by Jenkins core). -->
+        <hpi.bundledArtifacts>envinject-lib,jakarta.activation,jakarta.mail,xtrigger-lib</hpi.bundledArtifacts>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.jenkins.tools.bom</groupId>
+                <artifactId>bom-${jenkins.baseline}.x</artifactId>
+                <version>6715.v52b_c00222d1e</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jenkins-ci.lib</groupId>
+            <artifactId>xtrigger-lib</artifactId>
+            <version>0.36</version>
+            <exclusions>
+                <!-- Provided by the Jenkins baseline / test harness instead -->
+                <exclusion>
+                    <groupId>org.jenkins-ci.main</groupId>
+                    <artifactId>jenkins-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jenkins-ci.main</groupId>
+                    <artifactId>jenkins-test-harness</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Jakarta Mail 1.6.x still uses the javax.mail namespace that this plugin is written against -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>jakarta.mail</artifactId>
+            <version>1.6.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jenkins.plugins</groupId>
+            <artifactId>commons-lang3-api</artifactId>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.main</groupId>
+            <artifactId>jenkins-test-harness</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>repo.jenkins-ci.org</id>
+            <url>https://repo.jenkins-ci.org/public/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>repo.jenkins-ci.org</id>
+            <url>https://repo.jenkins-ci.org/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
