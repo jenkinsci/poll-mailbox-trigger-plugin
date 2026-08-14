@@ -1,1 +1,2 @@
+<?jelly escape-by-default='true'?>
 <div>A Jenkins plugin, to poll an email inbox, and trigger jobs based on new emails.</div>
