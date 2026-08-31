@@ -46,7 +46,7 @@
         <changelist>999999-SNAPSHOT</changelist>
         <gitHubRepo>poll-mailbox-trigger-plugin</gitHubRepo>
         <!-- https://www.jenkins.io/doc/developer/plugin-development/choosing-jenkins-baseline/ -->
-        <jenkins.baseline>2.541</jenkins.baseline>
+        <jenkins.baseline>2.555</jenkins.baseline>
         <jenkins.version>${jenkins.baseline}.3</jenkins.version>
         <!-- Third-party libraries intentionally bundled into the plugin (not provided by Jenkins core). -->
         <hpi.bundledArtifacts>envinject-lib,jakarta.activation,jakarta.mail,xtrigger-lib</hpi.bundledArtifacts>
@@ -57,7 +57,7 @@
             <dependency>
                 <groupId>io.jenkins.tools.bom</groupId>
                 <artifactId>bom-${jenkins.baseline}.x</artifactId>
-                <version>6715.v52b_c00222d1e</version>
+                <version>6931.vea_a_b_c6fd017d</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
